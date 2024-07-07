@@ -227,7 +227,7 @@ def identify_suspicious_connections(listening_ports, established_connections, lo
             if remote_ip not in local_ips and local_port not in listening_ports:
                 suspicious_ips.add(remote_ip)
 
-                suspicious_connections.append([local_ip, local_port, remote_ip, remote_port, pids, fds])
+                suspicious_connections.append(suspicious_connection)
                 for pid in pids:
                     suspicious_pid_info[pid] = connection
 
