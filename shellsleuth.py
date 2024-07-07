@@ -236,6 +236,8 @@ def identify_suspicious_connections(listening_ports, established_connections, lo
         local_ip, local_port, remote_ip, remote_port, pids, fds, binaries = parsed_connection
         suspicious_connection = [local_ip, local_port, remote_ip, remote_port, pids, fds]
 
+        is_whitelisted = next((binary for binary in binaries if binary in whitelist), None)
+
         if remote_ip in suspicious_ips and suspicious_connection not in suspicious_connections and not is_whitelisted:
             suspicious_connections.append(suspicious_connection)
             for pid in pids:
