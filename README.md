@@ -30,6 +30,11 @@ sudo apt-get install python3 iproute2
 sudo yum install python3 iproute
 ```
 
+## Try it out in --log-only mode, without installing
+```bash
+sudo python3 shellsleuth.py --log-only
+```
+
 ## Install ShellSleuth as a systemd service
 
 1. **Clone the repository:**
@@ -67,11 +72,6 @@ sudo yum install python3 iproute
     ```bash
     sudo bash install_shellsleuth.sh --strict --whitelist "nginx,sshd"
     ```
-
-## Try it out without installing
-```bash
-sudo python3 shellsleuth.py --log-only
-```
 
 ## Manually Modify the Systemd Service
 
