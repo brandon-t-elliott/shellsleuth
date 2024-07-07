@@ -20,7 +20,7 @@ scheduler = sched.scheduler(time.time, time.sleep)
 revshell_patterns = [
     'sh', 'bash', 'pwsh', 'ash', 'bsh', 'csh', 'ksh', 'zsh', 'pdksh',
     'tcsh', 'mksh', 'dash', 'fish', 'osh', 'elvish', 'es', 'xonsh',
-    'oksh', 'lksh', 'nc', 'ncat', 'openssl', 'perl', 'python', 'python2.7',
+    'oksh', 'lksh', 'nc', 'ncat', 'netcat', 'openssl', 'perl', 'python', 'python2.7',
     'python2', 'python3', 'ruby', 'busybox', 'curl', 'php', 'rcat',
     'socat', 'telnet', 'zsh', 'lua', 'lua5.1', 'go', 'v', 'awk', 'crystal'
 ]
