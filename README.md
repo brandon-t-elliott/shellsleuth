@@ -2,9 +2,15 @@
 
 ShellSleuth is designed to detect and kill reverse shell connections on a linux system. It continuously looks through established network connections and identifies reverse shells and terminates all processes spawned by them. 
 
-It can optionally be ran in --log-only mode to only detect and log them (it is recommended to run it with --log-only for an initial period of time such as a month or more to help identify any potential false positives on a particular system).
+It can optionally be ran in --log-only mode to only detect and log them (this is recommended, at least at first).
 
 Strict mode offers a higher level of security as it does not check the process against a list of common reverse shell binaries, but will be more prone to false positives. False positives can be whitelisted by specifying a comma-separated list of binaries to --whitelist.
+
+> ⚠️ **Warning:** More than anything, ShellSleuth is just a proof-of-concept. It is still being developed and fine-tuned. I would not recommend running it in production environments.
+
+## Demo
+
+![shellsleuth_demo](https://github.com/brandon-t-elliott/shellsleuth/assets/126433368/175c0493-1c7b-4e96-8b46-14accf2b7825)
 
 ## Dependencies
 - `python3` (doesn't require any additional pip packages apart from what's installed by default)
