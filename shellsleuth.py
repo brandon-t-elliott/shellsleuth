@@ -22,7 +22,7 @@ revshell_patterns = [
     'tcsh', 'mksh', 'dash', 'fish', 'osh', 'elvish', 'es', 'xonsh',
     'oksh', 'lksh', 'nc', 'ncat', 'netcat', 'openssl', 'perl', 'python', 'python2.7',
     'python2', 'python3', 'ruby', 'busybox', 'curl', 'php', 'rcat',
-    'socat', 'telnet', 'zsh', 'lua', 'lua5.1', 'go', 'v', 'awk', 'crystal'
+    'socat', 'telnet', 'lua', 'lua5.1', 'go', 'v', 'awk', 'crystal'
 ]
 
 # Stores the last logged time of reverse shells (only used when in --log-only mode)
