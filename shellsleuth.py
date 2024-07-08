@@ -144,8 +144,8 @@ def get_listening_ports(ss_path):
     for line in connections.split('\n'):
         if 'LISTEN' in line:
             parts = line.split()
-            if len(parts) >= 6:
-                local_address = parts[3]
+            if len(parts) >= 7:
+                local_address = parts[4]
 
                 address = local_address.rsplit(':', 1)[0]
                 if not address.startswith('127.') and not address == '[::1]':
@@ -188,12 +188,12 @@ def get_established_connections(ss_path):
 def parse_connection_info(connection):
     """Parse a line of `ss` output and return the parsed connection info."""
     parts = re.split(r'\s+', connection)
-    if len(parts) < 6:
+    if len(parts) < 7:
         return False
 
-    local_address_port = parts[3]
-    remote_address_port = parts[4]
-    process_info = parts[5] if len(parts) > 5 else ""
+    local_address_port = parts[4]
+    remote_address_port = parts[5]
+    process_info = parts[6] if len(parts) > 6 else ""
 
     binary_matches = re.findall(r'\("(\w+)",pid=', process_info)
     binaries = [binary for binary in binary_matches]
