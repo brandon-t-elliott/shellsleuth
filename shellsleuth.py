@@ -127,7 +127,7 @@ def kill_process(pid):
 def get_listening_ports(ss_path):
     """Use `ss` to get all listening ports on the local system. Do not include loopback addresses."""
     try:
-        result = subprocess.run([ss_path, '-ltanp'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        result = subprocess.run([ss_path, '-ltanup'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     except FileNotFoundError:
         log(f"Missing `ss` dependency. Exiting.")
         sys.exit(1)
@@ -159,7 +159,7 @@ def get_established_connections(ss_path):
     global last_established_connections_hash
 
     try:
-        result = subprocess.run([ss_path, '-tanp'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        result = subprocess.run([ss_path, '-tanup'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     except FileNotFoundError:
         log(f"Missing `ss` dependency. Exiting.")
         sys.exit(1)
