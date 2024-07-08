@@ -150,7 +150,7 @@ class TestShellSleuth(unittest.TestCase):
         strict = False
         log_only = True
         
-        check_for_reverse_shells(["192.168.1.101"], strict, log_only, "/usr/bin/ss", [""])
+        check_for_reverse_shells(["192.168.1.101"], strict, log_only, "/usr/bin/ss", [""], mock_get_established_connections.return_value)
         
         mock_log.assert_any_call("Reverse shell detected from IP: 192.168.1.104")
         mock_log.assert_any_call('Connection info: ESTAB      0        0           192.168.1.101:65111        192.168.1.104:9999   users:(("sh",pid=26997,fd=2),("sh",pid=26997,fd=1),("sh",pid=26997,fd=0))')
@@ -185,7 +185,7 @@ class TestShellSleuth(unittest.TestCase):
         strict = False
         log_only = True
         
-        check_for_reverse_shells(["192.168.1.101"], strict, log_only, "/usr/bin/ss", [""])
+        check_for_reverse_shells(["192.168.1.101"], strict, log_only, "/usr/bin/ss", [""], mock_get_established_connections.return_value)
         
         mock_log.assert_any_call("Reverse shell detected from IP: 192.168.1.104")
         mock_log.assert_any_call("Didn't terminate PID because shellsleuth is in --log-only mode: 26997")
@@ -218,7 +218,7 @@ class TestShellSleuth(unittest.TestCase):
         strict = True
         log_only = False
         
-        check_for_reverse_shells(["192.168.1.101"], strict, log_only, "/usr/bin/ss", [""])
+        check_for_reverse_shells(["192.168.1.101"], strict, log_only, "/usr/bin/ss", [""], mock_get_established_connections.return_value)
         
         mock_log.assert_any_call("Reverse shell detected from IP: 192.168.1.104")
         mock_log.assert_any_call("Terminated PID: 12345")
@@ -253,7 +253,7 @@ class TestShellSleuth(unittest.TestCase):
         strict = True
         log_only = False
         
-        check_for_reverse_shells(["192.168.1.101"], strict, log_only, "/usr/bin/ss", [""])
+        check_for_reverse_shells(["192.168.1.101"], strict, log_only, "/usr/bin/ss", [""], mock_get_established_connections.return_value)
         
         mock_log.assert_any_call("Reverse shell detected from IP: 192.168.1.104")
         mock_log.assert_any_call("Terminated PID: 12345")
@@ -288,7 +288,7 @@ class TestShellSleuth(unittest.TestCase):
         strict = False
         log_only = False
         
-        check_for_reverse_shells(["192.168.1.101"], strict, log_only, "/usr/bin/ss", [""])
+        check_for_reverse_shells(["192.168.1.101"], strict, log_only, "/usr/bin/ss", [""], mock_get_established_connections.return_value)
         
         assert not any(call == (("Reverse shell detected from IP: 192.168.1.104",),) for call in mock_log.call_args_list)
         assert not any(call == (("Terminated PID: 26997",),) for call in mock_log.call_args_list)
@@ -321,7 +321,7 @@ class TestShellSleuth(unittest.TestCase):
         strict = False
         log_only = False
         
-        check_for_reverse_shells(["192.168.1.101"], strict, log_only, "/usr/bin/ss", [""])
+        check_for_reverse_shells(["192.168.1.101"], strict, log_only, "/usr/bin/ss", [""], mock_get_established_connections.return_value)
         
         assert not any(call == (("Reverse shell detected from IP: 192.168.1.104",),) for call in mock_log.call_args_list)
         assert not any(call == (("Terminated PID: 26997",),) for call in mock_log.call_args_list)
@@ -352,7 +352,7 @@ class TestShellSleuth(unittest.TestCase):
         strict = False
         log_only = False
         
-        check_for_reverse_shells(["192.168.1.101"], strict, log_only, "/usr/bin/ss", [""])
+        check_for_reverse_shells(["192.168.1.101"], strict, log_only, "/usr/bin/ss", [""], mock_get_established_connections.return_value)
         
         assert not any(call == (("Reverse shell detected from IP: 192.168.1.104",),) for call in mock_log.call_args_list)
         assert not any(call == (("Terminated PID: 26997",),) for call in mock_log.call_args_list)
@@ -383,7 +383,7 @@ class TestShellSleuth(unittest.TestCase):
         strict = True
         log_only = False
         
-        check_for_reverse_shells(["192.168.1.101"], strict, log_only, "/usr/bin/ss", [""])
+        check_for_reverse_shells(["192.168.1.101"], strict, log_only, "/usr/bin/ss", [""], mock_get_established_connections.return_value)
         
         assert not any(call == (("Reverse shell detected from IP: 192.168.1.104",),) for call in mock_log.call_args_list)
         assert not any(call == (("Terminated PID: 26997",),) for call in mock_log.call_args_list)
@@ -416,7 +416,7 @@ class TestShellSleuth(unittest.TestCase):
         strict = True
         log_only = False
         
-        check_for_reverse_shells(["192.168.102.128"], strict, log_only, "/usr/bin/ss", [""])
+        check_for_reverse_shells(["192.168.102.128"], strict, log_only, "/usr/bin/ss", [""], mock_get_established_connections.return_value)
         
         mock_log.assert_any_call("Reverse shell detected from IP: 192.168.102.132")
         mock_log.assert_any_call("Terminated PID: 12345")
@@ -451,7 +451,7 @@ class TestShellSleuth(unittest.TestCase):
         strict = False
         log_only = False
         
-        check_for_reverse_shells(["192.168.102.128"], strict, log_only, "/usr/bin/ss", [""])
+        check_for_reverse_shells(["192.168.102.128"], strict, log_only, "/usr/bin/ss", [""], mock_get_established_connections.return_value)
         
         mock_log.assert_any_call("Reverse shell detected from IP: 192.168.102.132")
         mock_log.assert_any_call("Terminated PID: 12345")
@@ -486,7 +486,7 @@ class TestShellSleuth(unittest.TestCase):
         strict = False
         log_only = False
         
-        check_for_reverse_shells(["192.168.102.128"], strict, log_only, "/usr/bin/ss", [""])
+        check_for_reverse_shells(["192.168.102.128"], strict, log_only, "/usr/bin/ss", [""], mock_get_established_connections.return_value)
         
         mock_log.assert_any_call("Reverse shell detected from IP: 192.168.102.132")
         mock_log.assert_any_call("Terminated PID: 12345")
@@ -521,7 +521,7 @@ class TestShellSleuth(unittest.TestCase):
         strict = True
         log_only = False
         
-        check_for_reverse_shells(["192.168.102.128"], strict, log_only, "/usr/bin/ss", [""])
+        check_for_reverse_shells(["192.168.102.128"], strict, log_only, "/usr/bin/ss", [""], mock_get_established_connections.return_value)
         
         mock_log.assert_any_call("Reverse shell detected from IP: 192.168.102.132")
         mock_log.assert_any_call("Terminated PID: 12345")
@@ -556,7 +556,7 @@ class TestShellSleuth(unittest.TestCase):
         strict = True
         log_only = False
         
-        check_for_reverse_shells(["192.168.102.128"], strict, log_only, "/usr/bin/ss", [""])
+        check_for_reverse_shells(["192.168.102.128"], strict, log_only, "/usr/bin/ss", [""], mock_get_established_connections.return_value)
         
         mock_log.assert_any_call("Reverse shell detected from IP: 192.168.102.132")
         mock_log.assert_any_call("Terminated PID: 12345")
@@ -591,7 +591,7 @@ class TestShellSleuth(unittest.TestCase):
         strict = False
         log_only = False
         
-        check_for_reverse_shells(["192.168.102.128"], strict, log_only, "/usr/bin/ss", [""])
+        check_for_reverse_shells(["192.168.102.128"], strict, log_only, "/usr/bin/ss", [""], mock_get_established_connections.return_value)
         
         assert not any(call == (("Reverse shell detected from IP: 192.168.102.132",),) for call in mock_log.call_args_list)
         assert not any(call == (("Terminated PID: 12345",),) for call in mock_log.call_args_list)
@@ -626,7 +626,7 @@ class TestShellSleuth(unittest.TestCase):
         strict = True
         log_only = True
         
-        check_for_reverse_shells(["192.168.102.128"], strict, log_only, "/usr/bin/ss", [""])
+        check_for_reverse_shells(["192.168.102.128"], strict, log_only, "/usr/bin/ss", [""], mock_get_established_connections.return_value)
         
         mock_log.assert_any_call("Reverse shell detected from IP: 192.168.102.132")
         mock_log.assert_any_call("Didn't terminate PID because shellsleuth is in --log-only mode: 12345")
@@ -664,7 +664,7 @@ class TestShellSleuth(unittest.TestCase):
         strict = True
         log_only = True
         
-        check_for_reverse_shells(["192.168.102.128"], strict, log_only, "/usr/bin/ss", [""])
+        check_for_reverse_shells(["192.168.102.128"], strict, log_only, "/usr/bin/ss", [""], mock_get_established_connections.return_value)
         
         assert not any(call == (("Reverse shell detected from IP: 192.168.102.132",),) for call in mock_log.call_args_list)
         assert not any(call == (("Didn't terminate PID because shellsleuth is in --log-only mode: 12345",),) for call in mock_log.call_args_list)
@@ -702,7 +702,7 @@ class TestShellSleuth(unittest.TestCase):
         strict = True
         log_only = True
         
-        check_for_reverse_shells(["192.168.102.128"], strict, log_only, "/usr/bin/ss", [""])
+        check_for_reverse_shells(["192.168.102.128"], strict, log_only, "/usr/bin/ss", [""], mock_get_established_connections.return_value)
 
         mock_log.assert_any_call("Reverse shell detected from IP: 192.168.102.132")
         mock_log.assert_any_call("Didn't terminate PID because shellsleuth is in --log-only mode: 12345")
@@ -717,7 +717,7 @@ class TestShellSleuth(unittest.TestCase):
         strict = True
         log_only = True
 
-        check_for_reverse_shells(["192.168.102.128"], strict, log_only, "/usr/bin/ss", [""])
+        check_for_reverse_shells(["192.168.102.128"], strict, log_only, "/usr/bin/ss", [""], mock_get_established_connections.return_value)
 
         assert not any(call == (("Reverse shell detected from IP: 192.168.102.132",),) for call in mock_log.call_args_list)
         assert not any(call == (("Didn't terminate PID because shellsleuth is in --log-only mode: 12345",),) for call in mock_log.call_args_list)

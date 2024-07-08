@@ -304,14 +304,9 @@ def handle_reverse_shell(suspicious_ip, local_pids, suspicious_pids, suspicious_
             if pid in suspicious_pid_info:
                 log(f"Connection info: {suspicious_pid_info[pid]}")
 
-def check_for_reverse_shells(local_ips, strict, log_only, ss_path, whitelist):
+def check_for_reverse_shells(local_ips, strict, log_only, ss_path, whitelist, established_connections):
     """Check for reverse shells by inspecting established network connections."""
     try:
-        established_connections = get_established_connections(ss_path)
-
-        if not established_connections:
-            return
-        
         listening_ports = get_listening_ports(ss_path)
 
         suspicious_connections, suspicious_ips, suspicious_pid_info = identify_suspicious_connections(listening_ports, established_connections, local_ips, strict, whitelist)
@@ -369,8 +364,13 @@ def get_binary_path(binary_name):
 
 def main(scheduler, strict, log_only, ip_path, ss_path, whitelist):
     """The main loop."""
-    local_ips = get_local_ip_addresses(ip_path)
-    check_for_reverse_shells(local_ips, strict, log_only, ss_path, whitelist)
+    established_connections = get_established_connections(ss_path)
+
+    # if no established connections or established connections hasn't changed, skip checking to improve efficiency
+    if established_connections:
+        local_ips = get_local_ip_addresses(ip_path)
+        check_for_reverse_shells(local_ips, strict, log_only, ss_path, whitelist, established_connections)
+
     scheduler.enter(0.2, 1, main, (scheduler, strict, log_only, ip_path, ss_path, whitelist))
 
 if __name__ == "__main__":
