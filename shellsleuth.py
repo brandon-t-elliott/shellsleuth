@@ -173,6 +173,9 @@ def get_established_connections(ss_path):
     connections = result.stdout
     established_connections = [line for line in connections.split('\n') if 'ESTAB' in line]
 
+    if not established_connections:
+        return False
+
     established_connections_hash = hashlib.sha256('\n'.join(established_connections).encode('utf-8')).hexdigest()
 
     if last_established_connections_hash == established_connections_hash:
