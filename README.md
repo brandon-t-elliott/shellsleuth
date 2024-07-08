@@ -10,7 +10,7 @@ Strict mode offers a higher level of security as it does not check the process a
 
 ## Demo
 
-![shellsleuth_demo](https://github.com/brandon-t-elliott/shellsleuth/assets/126433368/175c0493-1c7b-4e96-8b46-14accf2b7825)
+https://github.com/brandon-t-elliott/shellsleuth/assets/126433368/c2a5e846-1cb7-4b25-9f6c-ef93a6c3a703
 
 ## Dependencies
 - `python3` (doesn't require any additional pip packages apart from what's installed by default)
